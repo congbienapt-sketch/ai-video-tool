@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Video TTS</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <h1>Admin: Upload video + SRT</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="card">
+      <label>Video file</label>
+      <input type="file" name="video" accept="video/*" required />
+
+      <label>SRT file</label>
+      <input type="file" name="srt" accept=".srt" required />
+
+      <label>Voice (Edge-TTS)</label>
+      <input type="text" name="voice" value="vi-VN-HoaiMyNeural" />
+
+      <label>Rate</label>
+      <input type="text" name="rate" value="+0%" />
+
+      <button type="submit">Tạo video</button>
+    </form>
+  </div>
+</body>
+</html>
